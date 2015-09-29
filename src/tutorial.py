@@ -8,7 +8,8 @@ app = Flask(__name__)
 
 
 #TUTORIAL_REPOSITORY = 'http://localhost:8080/openrdf-sesame/repositories/tutorial'
-TUTORIAL_REPOSITORY = 'http://localhost:5820/tutorial'
+TUTORIAL_REPOSITORY = 'http://localhost:5820/foodstuff'
+#app.config['SERVER_NAME'] = 'http://127.0.0.1:5000'
 
 @app.route('/')
 def first_page():
@@ -34,6 +35,7 @@ def sparql():
     query = request.args.get('query', None)
 
     return_format = request.args.get('format','JSON')
+    reasoning = request.args.get('reasoning')
 
 
     if endpoint and query :
@@ -46,8 +48,9 @@ def sparql():
         else :
             sparql.setReturnFormat(JSON)
             sparql.addParameter('Accept','application/sparql-results+json')
-
-        sparql.addParameter('reasoning','true')
+            
+        if reasoning == 'yes':
+            sparql.addParameter('reasoning','true')
 
         app.logger.debug('Query:\n{}'.format(query))
 

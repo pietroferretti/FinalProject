@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>SW2015 Tutorial TEST TEST TEST</title>
+		<title>Assignment 4 - Pietro Ferretti</title>
 	</head>
 
 	<body>
 		<div class="container">
 			<div class='row'>
 				<div class='col-lg-12'>
-					<h1>Welcome to the SW2015 Tutorial Server</h1>
+					<h1>Welcome to Peter's Lair</h1>
 					<p>Our server is running at <code>{{ url_for('first_page', _external=True) }}</code></p>
 				</div>
 			</div>
-			<div class='row'>
+<!--			<div class='row'>
 				<div class='col-lg-12'>
 					<h3>Step 1 <small>Dynamic loading of CSS and Javascript</small></h3>
 					<p>Click the link to make this page look a bit nicer</p>
@@ -82,7 +82,7 @@
 							<input type='text' class='form-control' id='messageInput3' placeholder='Type some nifty message'>
 						</div>
 					</form>
-					<!-- <div><a id="link5" class='btn btn-primary'>link</a></div> -->
+
 				</div>
 				<div class='col-lg-6'>
 					<h3>Output</h3>
@@ -100,7 +100,7 @@
 							<input type='text' class='form-control' id='messageInput7' placeholder='Type some nifty message'>
 						</div>
 					</form>
-					<!-- <div><a id="link5" class='btn btn-primary'>link</a></div> -->
+
 				</div>
 				<div class='col-lg-6'>
 					<h3>Output</h3>
@@ -118,7 +118,7 @@
 							<input type='text' class='form-control' id='messageInput8' placeholder='Type some nifty message'>
 						</div>
 					</form>
-					<!-- <div><a id="link5" class='btn btn-primary'>link</a></div> -->
+
 				</div>
 				<div class='col-lg-6'>
 					<h3>Output</h3>
@@ -137,7 +137,7 @@
 							<input type='text' class='form-control' id='messageInput9' placeholder='Type some nifty message'>
 						</div>
 					</form>
-					<!-- <div><a id="link5" class='btn btn-primary'>link</a></div> -->
+
 				</div>
 				<div class='col-lg-6'>
 					<h3>Output</h3>
@@ -198,9 +198,11 @@ CONSTRUCT {
 					<div id="linktarget11" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
 				</div>
 			</div>
+-->
 			<div class='row'>
 				<div class='col-lg-6'>
-					<h3>Step 12 <small>Add some Schema</small></h3>
+
+					<h3>Storing <small>Add some Schema</small></h3>
 					<p>Let's add some schema information to our repository:</p>
 					<textarea class="form-control" id="schema" class='turtle' style='width: 100%' rows='10'>
 @prefix owl:  &lt;http://www.w3.org/2002/07/owl#&gt; .
@@ -211,7 +213,7 @@ CONSTRUCT {
 # to the 'Pharmacological Substance' class in LLD
 dbo:Drug owl:equivalentClass umls-semnetwork:T121 .
 </textarea>
-					<p>Click the link button to <em>POST</em> the schema to our own triple store. Again, we will wrap this call in a server side function <code>{{ url_for('store') }}</code></p>
+					<p>Click the link button to <em>POST</em> the schema to our own triple store. We will wrap this call in a server side function <code>{{ url_for('store') }}</code></p>
 					<div><a id="link12" class='btn btn-primary'>link</a></div>
 				</div>
 				<div class='col-lg-6'>
@@ -219,6 +221,7 @@ dbo:Drug owl:equivalentClass umls-semnetwork:T121 .
 					<div id="linktarget12" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
 				</div>
 			</div>
+<!--
 			<div class='row'>
 				<div class='col-lg-6'>
 					<h3>Step 13 <small>Query for <code>rdf:type</code> relations</small></h3>
@@ -239,10 +242,11 @@ SELECT ?x WHERE {
 					<div id="linktarget13" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
 				</div>
 			</div>
+-->
 			<div class='row'>
 				<div class='col-lg-6'>
-					<h3>Step 14 <small>Parsing query results</small></h3>
-					<p>Just because some people dislike the number 13, let's run a query against the repository, do some client-side parsing of the JSON results, and show them in the <code>div</code>:</p>
+					<h3>Querying (without inferencing?)</h3>
+					<p>Let's run a query against the repository, do some client-side parsing of the JSON results, and show them in the <code>div</code>:</p>
 					<textarea id='query14' class='sparql' style='width: 100%' rows='10'>
 PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
 PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
@@ -251,12 +255,33 @@ SELECT ?x WHERE {
   ?x a dbo:Drug .
 }
 </textarea>
-					<p>Click the link button to <em>GET</em> the query to our triple store. Again, we will wrap this call in a server side function <code>{{ url_for('sparql') }}</code></p>
+					<p>Click the link button to <em>GET</em> the query to our triple store. We will wrap this call in a server side function <code>{{ url_for('sparql') }}</code></p>
 					<div><a id="link14" class='btn btn-primary'>link</a></div>
 				</div>
 				<div class='col-lg-6'>
 					<h3>Output</h3>
 					<div id="linktarget14" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
+				</div>
+			</div>
+
+			<div class='row'>
+				<div class='col-lg-6'>
+					<h3>Querying (with inferencing?)</h3>
+					<p>Let's run a query against the repository, do some client-side parsing of the JSON results, and show them in the <code>div</code>:</p>
+					<textarea id='query15' class='sparql' style='width: 100%' rows='10'>
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
+
+SELECT ?x WHERE {
+  ?x a dbo:Drug .
+}
+</textarea>
+					<p>Click the link button to <em>GET</em> the query to our triple store. Again, we will wrap this call in a server side function <code>{{ url_for('sparql') }}</code></p>
+					<div><a id="link15" class='btn btn-primary'>link</a></div>
+				</div>
+				<div class='col-lg-6'>
+					<h3>Output</h3>
+					<div id="linktarget15" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
 				</div>
 			</div>
 
