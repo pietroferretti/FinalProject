@@ -205,13 +205,13 @@ CONSTRUCT {
 					<h3>Storing <small>Add some Schema</small></h3>
 					<p>Let's add some schema information to our repository:</p>
 					<textarea class="form-control" id="schema" class='turtle' style='width: 100%' rows='10'>
-@prefix owl:  &lt;http://www.w3.org/2002/07/owl#&gt; .
-@prefix dbo: &lt;http://dbpedia.org/ontology/&gt; .
-@prefix umls-semnetwork: &lt;http://linkedlifedata.com/resource/semanticnetwork/id/&gt; .
+PREFIX owl:  &lt;http://www.w3.org/2002/07/owl#&gt; 
+PREFIX rdf:  &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX peter: &lt;http://www.semanticweb.org/pietro/peterOntology#&gt; 
 
-# Let's say that the class of DBPedia 'Drug's is equivalent
-# to the 'Pharmacological Substance' class in LLD
-dbo:Drug owl:equivalentClass umls-semnetwork:T121 .
+peter:Pasta owl:equivalentClass peter:Rice .
+
 </textarea>
 					<p>Click the link button to <em>POST</em> the schema to our own triple store. We will wrap this call in a server side function <code>{{ url_for('store') }}</code></p>
 					<div><a id="link12" class='btn btn-primary'>link</a></div>
@@ -245,14 +245,16 @@ SELECT ?x WHERE {
 -->
 			<div class='row'>
 				<div class='col-lg-6'>
-					<h3>Querying (without inferencing?)</h3>
+					<h3>Querying (without inferencing)</h3>
 					<p>Let's run a query against the repository, do some client-side parsing of the JSON results, and show them in the <code>div</code>:</p>
 					<textarea id='query14' class='sparql' style='width: 100%' rows='10'>
-PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
-PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
+PREFIX owl:  &lt;http://www.w3.org/2002/07/owl#&gt; 
+PREFIX rdf:  &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX peter: &lt;http://www.semanticweb.org/pietro/peterOntology#&gt; 
 
 SELECT ?x WHERE {
-  ?x a dbo:Drug .
+  ?x a peter:Course .
 }
 </textarea>
 					<p>Click the link button to <em>GET</em> the query to our triple store. We will wrap this call in a server side function <code>{{ url_for('sparql') }}</code></p>
@@ -266,14 +268,16 @@ SELECT ?x WHERE {
 
 			<div class='row'>
 				<div class='col-lg-6'>
-					<h3>Querying (with inferencing?)</h3>
+					<h3>Querying (with inferencing)</h3>
 					<p>Let's run a query against the repository, do some client-side parsing of the JSON results, and show them in the <code>div</code>:</p>
 					<textarea id='query15' class='sparql' style='width: 100%' rows='10'>
-PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
-PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
+PREFIX owl:  &lt;http://www.w3.org/2002/07/owl#&gt; 
+PREFIX rdf:  &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX peter: &lt;http://www.semanticweb.org/pietro/peterOntology#&gt; 
 
 SELECT ?x WHERE {
-  ?x a dbo:Drug .
+  ?x a peter:Course .
 }
 </textarea>
 					<p>Click the link button to <em>GET</em> the query to our triple store. Again, we will wrap this call in a server side function <code>{{ url_for('sparql') }}</code></p>
