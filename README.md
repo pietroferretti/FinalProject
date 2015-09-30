@@ -1,4 +1,4 @@
-#HOW TO MAKE IT WORK
+#Reminder
 
 * `stardog-admin server start --disable-security`
 * `virtualenv .` in the repository directory
