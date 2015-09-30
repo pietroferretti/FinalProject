@@ -14,7 +14,6 @@
 
 $('#linkcourses').on('click',function(e){
 	var course = $('#selectcourse').val();
-	//$('#linktarget1').html(value1);
 	
 	var query = 'PREFIX owl:  <http://www.w3.org/2002/07/owl#>' + 
 				  'PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ' +
@@ -81,7 +80,6 @@ $('#linkcourses').on('click',function(e){
 
 $('#linkdishes').on('click',function(e){
 	var type = $('#selectdish').val();
-	//$('#linktarget1').html(value1);
 	
 	var query = 'PREFIX owl:  <http://www.w3.org/2002/07/owl#>' + 
 				  'PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ' +

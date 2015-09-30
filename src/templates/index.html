@@ -19,12 +19,12 @@
   			</h4>
   			<p>Use this button to toggle reasoning on and off</p>
 
-<!-- -->
-
 			<div class='row'>
 				<div class='col-lg-6'>
 
-					<h3>What dishes can be served in a specific course?</h3>
+					<h3>Which dishes can be served in a specific course?</h3>
+					<p>In this section we can look for all the dishes in our ontology listed as servable under a certain course. </p>
+					<p>Without inference the server cannot find the ice creams under Desserts because this connection is not explicit, but defined with restrictions.</p>
 					<p>Select a course:</p>
 					<p>
 					<select class="form-control" id="selectcourse">
@@ -34,8 +34,8 @@
 						<option value="Dessert">Dessert</option>
 					</select>
 					</p>
-					<p>Click the link button to query the database.</p>
-					<div><a id="linkcourses" class='btn btn-primary'>link</a></div>
+					<p>Click the button to query the database.</p>
+					<div><a id="linkcourses" class='btn btn-primary'>Press me!</a></div>
 				</div>
 				<div class='col-lg-6'>
 					<h3>Output</h3>
@@ -47,6 +47,8 @@
 				<div class='col-lg-6'>
 
 					<h3>Type of dishes</h3>
+					<p>Find all the dishes classified under one of these broad categories.</p>
+					<p>Without reasoning nothing will be found at all, because all the categories are defined indirectly through restrictions, and no explicit assertions are actually made.</p>
 					<p>Select a type:</p>
 					<p>
 					<select class="form-control" id="selectdish">
@@ -58,8 +60,8 @@
 						<option value="IceCreamDessert">Ice cream desserts</option>
 					</select>
 					</p>
-					<p>Click the link button to query the database.</p>
-					<div><a id="linkdishes" class='btn btn-primary'>link</a></div>
+					<p>Click the button to query the database.</p>
+					<div><a id="linkdishes" class='btn btn-primary'>Press me!</a></div>
 				</div>
 				<div class='col-lg-6'>
 					<h3>Output</h3>
