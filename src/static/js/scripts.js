@@ -12,6 +12,50 @@
 	$('body').append(bootstrapToggleJS);	
 //
 
+
+   var counter = 3;
+		
+    $("#addButton").click(function () {
+				
+	if(counter > 10){
+            alert("Only 10 textboxes allowed for now");
+            return false;
+	}   
+		
+	var newTextBoxDiv = $(document.createElement('div'))
+	     .attr("id", 'TextBoxDiv' + counter);
+                
+	newTextBoxDiv.after().html('<input class="form-control" type="text" name="textbox' + counter + 
+	      					   '" id="textbox' + counter + '" value="" >');
+            
+	newTextBoxDiv.appendTo("#TextBoxesGroup");
+
+				
+	counter++;
+     });
+
+     $("#removeButton").click(function () {
+	if(counter == 2){
+          alert("No more textbox to remove");
+          return false;
+       }   
+        
+	counter--;
+			
+        $("#TextBoxDiv" + counter).remove();
+			
+     });
+		
+     $("#getButtonValue").click(function () {
+		
+	var msg = '';
+	for(i=2; i<counter; i++){
+   	  msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
+	}
+    	  alert(msg);
+     });
+
+
 $('#inputdisease').bind('input', function() {
 	var input = $(this).val();
 
@@ -20,7 +64,7 @@ $('#inputdisease').bind('input', function() {
 				  'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
 				  'PREFIX : <http://huiqingao.com/ontology/interactingDrugs.ttl#>' +
 				  ' ' +
-				  'SELECT ?disease ?label WHERE {' +
+				  'SELECT ?label ?disease WHERE {' +
     			  '    ?disease a :Disease;' +
     			  '             rdfs:label ?label. ' +
     			  '    FILTER regex(?label, "' + input + '", "i")' +
@@ -83,9 +127,17 @@ $('#button2').on('click',function(e){
 				  'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
 				  'PREFIX : <http://huiqingao.com/ontology/interactingDrugs.ttl#>' +
 				  ' ' +
-				  'SELECT ?drug WHERE {' +
-    			  '<' + input +'> :possibleDrug ?drug .' +
-				  '}';
+				  'SELECT ?label ?drug WHERE {' +
+    			  '{<' + input +'> :possibleDrug ?drug .}';
+
+    for(i = 1; i < counter; i++){
+   	    query += 'UNION' +
+   	  			 '{<' + $('#textbox' + i).val() + '> :possibleDrug ?drug .}';
+	}
+
+    query += '?drug rdfs:label ?label.' +
+			 '}' +
+			 'ORDER BY ?label';
 	var endpoint = 'http://localhost:5820/interdrugs/query';
 	var format = 'JSON';
 	var reasoning = 'yes';
@@ -129,9 +181,77 @@ $('#button2').on('click',function(e){
 		} catch(err) {
 			$('#linktarget2').html('Something went wrong!');
 		}
-		
-
-		
 	});
+		
+	var query2 = 'PREFIX owl:  <http://www.w3.org/2002/07/owl#>' + 
+				  'PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ' +
+				  'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
+				  'PREFIX : <http://huiqingao.com/ontology/interactingDrugs.ttl#>' +
+				  ' ' +
+				  'SELECT ?label1 ?drug1 ?label2 ?drug2 WHERE {' +
+    			  '{<' + input +'> :possibleDrug ?drug1 .}';
+
+    for(i = 1; i < counter; i++){
+   	    query2 += 'UNION' +
+   	  			 '{<' + $('#textbox' + i).val() + '> :possibleDrug ?drug1 .}';
+	}
+
+    query2 += '{<' + input +'> :possibleDrug ?drug2 .}';
+
+    for(i = 1; i < counter; i++){
+   	    query2 += 'UNION' +
+   	  			 '{<' + $('#textbox' + i).val() + '> :possibleDrug ?drug2 .}';
+	}
+
+    query2 += '?drug1 rdfs:label ?label1;' +
+    		  '       :interactsWith ?drug2.' +
+    		  '?drug2 rdfs:label ?label2.' +
+			  '}' +
+			  'ORDER BY ?label1';
+
+	$.get('/sparql',data={'endpoint': endpoint, 'query': query2, 'format': format, 'reasoning': reasoning}, function(json){
+		console.log(json);
+		
+		try {
+			var vars = json.head.vars;
+	
+			var ul = $('<ul></ul>');
+			ul.addClass('list-group');
+		
+			$.each(json.results.bindings, function(index,value){
+				var li = $('<li></li>');
+				li.addClass('list-group-item');
+			
+				$.each(vars, function(index, v){
+					var v_type = value[v]['type'];
+					var v_value = value[v]['value'];
+				
+					// If the value is a URI, create a hyperlink
+					if (v_type == 'uri') {
+						var a = $('<a></a>');
+						a.attr('href',v_value);
+						a.text(v_value);
+						li.append(a);
+					// Else we're just showing the value.
+					} else {
+						li.append(v_value);
+					}
+					li.append('<br/>');
+					
+				});
+				ul.append(li);
+			
+			});
+			
+			$('#linktarget2b').html(ul);
+
+		} catch(err) {
+			$('#linktarget2b').html('Something went wrong!');
+		}
+	
+	});
+
 	
 });
+
+

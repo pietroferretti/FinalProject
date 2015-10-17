@@ -19,7 +19,7 @@
 					<h3>Find a disease</h3>
 					<p>Write something</p>
 					<p>
-					<input type=text class="form-control" id="inputdisease">
+					<input type="text" class="form-control" id="inputdisease">
 					</p>
 
 				</div>
@@ -34,9 +34,22 @@
 
 					<h3>Find drugs</h3>
 					<p>Copy and paste a disease URL here: </p>
+					<div>
+					<input type="text" class="form-control" id="inputdrugs">
+					</div>
+
+					<!-- -->
+					<div id='TextBoxesGroup'>
+						<div id="TextBoxDiv2">
+							<input class="form-control" type='textbox' id='textbox2' >
+						</div>
+					</div>
 					<p>
-					<input type=text class="form-control" id="inputdrugs">
+						<input type='button' class='btn btn-primary' value='Add Button' id='addButton'>
+						<input type='button' class='btn btn-primary' value='Remove Button' id='removeButton'>
+						<input type='button' class='btn btn-primary' value='Get TextBox Value' id='getButtonValue'>
 					</p>
+					<!-- -->
 
 					<p>Click the button to query the database.</p>
 					<div><a id="button2" class='btn btn-primary'>Press me!</a></div>
@@ -44,6 +57,10 @@
 				<div class='col-lg-6'>
 					<h3>Output</h3>
 					<div id="linktarget2" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
+				</div>
+								<div class='col-lg-6'>
+					<h3>Output 2</h3>
+					<div id="linktarget2b" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
 				</div>
 			</div>
 
