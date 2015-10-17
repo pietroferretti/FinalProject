@@ -12,24 +12,24 @@
 	$('body').append(bootstrapToggleJS);	
 //
 
-$('#linkcourses').on('click',function(e){
-	var course = $('#selectcourse').val();
-	
+$('#inputdisease').bind('input', function() {
+	var input = $(this).val();
+
 	var query = 'PREFIX owl:  <http://www.w3.org/2002/07/owl#>' + 
 				  'PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ' +
 				  'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
-				  'PREFIX peter: <http://www.semanticweb.org/pietro/peterOntology#>' +
+				  'PREFIX : <http://huiqingao.com/ontology/interactingDrugs.ttl#>' +
 				  ' ' +
-				  'SELECT ?dish WHERE {' +
-    			  '    ?dish peter:servedInCourse peter:' + course + '. '+
-				  '}';
-	var endpoint = 'http://localhost:5820/foodstuff/query';
+				  'SELECT ?disease ?label WHERE {' +
+    			  '    ?disease a :Disease;' +
+    			  '             rdfs:label ?label. ' +
+    			  '    FILTER regex(?label, "' + input + '", "i")' +
+				  '}' +
+				  'ORDER BY ?label';
+	var endpoint = 'http://localhost:5820/interdrugs/query';
 	var format = 'JSON';
-	var reasoning = 'no';
-	if (document.getElementById('reascheck').checked) {
-		reasoning = 'yes';
-    }
-	
+	var reasoning = 'yes';
+
 	$.get('/sparql',data={'endpoint': endpoint, 'query': query, 'format': format, 'reasoning': reasoning}, function(json){
 		console.log(json);
 		
@@ -51,7 +51,7 @@ $('#linkcourses').on('click',function(e){
 					if (v_type == 'uri') {
 						var a = $('<a></a>');
 						a.attr('href',v_value);
-						a.text(v_value.split('#')[1]);
+						a.text(v_value);
 						li.append(a);
 					// Else we're just showing the value.
 					} else {
@@ -75,27 +75,21 @@ $('#linkcourses').on('click',function(e){
 	});
 	
 });
+$('#button2').on('click',function(e){
+	var input = $('#inputdrugs').val();
 
-//Find dishes by type
-
-$('#linkdishes').on('click',function(e){
-	var type = $('#selectdish').val();
-	
 	var query = 'PREFIX owl:  <http://www.w3.org/2002/07/owl#>' + 
 				  'PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ' +
 				  'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
-				  'PREFIX peter: <http://www.semanticweb.org/pietro/peterOntology#>' +
+				  'PREFIX : <http://huiqingao.com/ontology/interactingDrugs.ttl#>' +
 				  ' ' +
-				  'SELECT ?dish WHERE {' +
-    			  '    ?dish a peter:' + type + '. '+
+				  'SELECT ?drug WHERE {' +
+    			  '<' + input +'> :possibleDrug ?drug .' +
 				  '}';
-	var endpoint = 'http://localhost:5820/foodstuff/query';
+	var endpoint = 'http://localhost:5820/interdrugs/query';
 	var format = 'JSON';
-	var reasoning = 'no';
-	if (document.getElementById('reascheck').checked) {
-		reasoning = 'yes';
-    }
-	
+	var reasoning = 'yes';
+
 	$.get('/sparql',data={'endpoint': endpoint, 'query': query, 'format': format, 'reasoning': reasoning}, function(json){
 		console.log(json);
 		
@@ -112,12 +106,12 @@ $('#linkdishes').on('click',function(e){
 				$.each(vars, function(index, v){
 					var v_type = value[v]['type'];
 					var v_value = value[v]['value'];
-
+				
 					// If the value is a URI, create a hyperlink
 					if (v_type == 'uri') {
 						var a = $('<a></a>');
 						a.attr('href',v_value);
-						a.text(v_value.split('#')[1]);
+						a.text(v_value);
 						li.append(a);
 					// Else we're just showing the value.
 					} else {
@@ -131,6 +125,7 @@ $('#linkdishes').on('click',function(e){
 			});
 			
 			$('#linktarget2').html(ul);
+
 		} catch(err) {
 			$('#linktarget2').html('Something went wrong!');
 		}
@@ -140,5 +135,3 @@ $('#linkdishes').on('click',function(e){
 	});
 	
 });
-
-

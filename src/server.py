@@ -7,8 +7,7 @@ import json
 app = Flask(__name__)
 
 
-#TUTORIAL_REPOSITORY = 'http://localhost:8080/openrdf-sesame/repositories/tutorial'
-TUTORIAL_REPOSITORY = 'http://localhost:5820/foodstuff'
+REPOSITORY = 'http://localhost:5820/interdrugs'
 #app.config['SERVER_NAME'] = 'http://127.0.0.1:5000'
 
 @app.route('/')
@@ -88,7 +87,7 @@ def store():
 
 
 
-    transaction_begin_url = TUTORIAL_REPOSITORY + "/transaction/begin"
+    transaction_begin_url = REPOSITORY + "/transaction/begin"
     app.logger.debug('Doing a POST of your data to {}'.format(transaction_begin_url))
 
     # Start the transaction, and get a transaction_id
@@ -97,14 +96,14 @@ def store():
     app.logger.debug(response.status_code)
 
     # POST the data to the transaction
-    post_url = TUTORIAL_REPOSITORY + "/" + transaction_id + "/add"
+    post_url = REPOSITORY + "/" + transaction_id + "/add"
     app.logger.debug('Assuming your data is Turtle!!')
     response = requests.post(post_url, data=data, headers={'Accept': 'text/plain', 'Content-type': 'text/turtle'})
     app.logger.debug(response.status_code)
 
 
     # Close the transaction
-    transaction_close_url = TUTORIAL_REPOSITORY + "/transaction/commit/" + transaction_id
+    transaction_close_url = REPOSITORY + "/transaction/commit/" + transaction_id
     response = requests.post(transaction_close_url)
     app.logger.debug(response.status_code)
     app.logger.debug(response.content)
