@@ -1,0 +1,12 @@
+- Implement list of interacting drugs
+- Add genes and related diseases
+
+- Add description of interactions with sparql
+- What about filters and inferences?
+- Brand names?
+- Add disease/drug description on click?
+- If I had a month more: download subTypeOf and group diseases by subcategories
+
+Style:
+- Add highlight on hover for interacting drugs
+- Better theme

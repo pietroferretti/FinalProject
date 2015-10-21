@@ -28,6 +28,10 @@
 				</div>
 
 				<div class='col-lg-6'>
+					<h3>Selected</h3>
+					<button class="btn btn-primary diseaseInput">Go?</button>
+					<button class="btn btn-warning testButton">Test</button>
+					<div id="testbox"></div>
 					<ul id='diseaselist' class='list-group'>
 					</ul>
 				</div>
@@ -37,32 +41,13 @@
 				<div class='col-lg-6'>
 
 					<h3>Find drugs</h3>
-					<p>Copy and paste a disease URL here: </p>
-					<div>
-					<input type="text" class="form-control" id="inputdrugs">
-					</div>
-
-					<!-- -->
-					<div id='TextBoxesGroup'>
-						<div id="TextBoxDiv2">
-							<input class="form-control" type='textbox' id='textbox2' >
-						</div>
-					</div>
-					<p>
-						<input type='button' class='btn btn-primary' value='Add Button' id='addButton'>
-						<input type='button' class='btn btn-primary' value='Remove Button' id='removeButton'>
-						<input type='button' class='btn btn-primary' value='Get TextBox Value' id='getButtonValue'>
-					</p>
-					<!-- -->
-
-					<p>Click the button to query the database.</p>
+					<p>The application gets the selected diseases and queries the database</p>
 					<div><a id="button2" class='btn btn-primary'>Press me!</a></div>
 				</div>
 				<div class='col-lg-6'>
 					<h3>Drugs</h3>
 					<div id="linktarget2" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
-				</div>
-								<div class='col-lg-6'>
+
 					<h3>Interacting Drugs</h3>
 					<div id="linktarget2b" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
 				</div>
