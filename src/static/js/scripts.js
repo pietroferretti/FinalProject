@@ -12,7 +12,7 @@
 	$('body').append(bootstrapToggleJS);	
 //
 
-
+// EXPERIMENT WITH INPUT BOXES
    var counter = 3;
 		
     $("#addButton").click(function () {
@@ -55,6 +55,7 @@
     	  alert(msg);
      });
 
+// QUERYING DISEASES
 
 $('#inputdisease').bind('input', function() {
 	var input = $(this).val();
@@ -104,6 +105,7 @@ $('#inputdisease').bind('input', function() {
 					li.append('<br/>');
 					
 				});
+				li.append("<button type='button' class='btn btn-secondary addDisease'>Add</button>");
 				ul.append(li);
 			
 			});
@@ -119,8 +121,13 @@ $('#inputdisease').bind('input', function() {
 	});
 	
 });
+
+// QUERYING POSSIBLE DRUGS AND INTERACTING DRUGS
+
 $('#button2').on('click',function(e){
 	var input = $('#inputdrugs').val();
+
+	//possible drugs
 
 	var query = 'PREFIX owl:  <http://www.w3.org/2002/07/owl#>' + 
 				  'PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ' +
@@ -182,6 +189,8 @@ $('#button2').on('click',function(e){
 			$('#linktarget2').html('Something went wrong!');
 		}
 	});
+
+	//interacting drugs
 		
 	var query2 = 'PREFIX owl:  <http://www.w3.org/2002/07/owl#>' + 
 				  'PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ' +
@@ -254,4 +263,18 @@ $('#button2').on('click',function(e){
 	
 });
 
+// Removing disease results
+$(document).on("click", "button.removeDisease", function(){
+	$(this).parent("li").remove();
+});
 
+var i = 0;
+
+$(document).on("click", "button.addDisease", function(){
+	var li = $('<li></li>');
+	li.text(i + '  ' + $(this).parent("li").text());
+	li.addClass("list-group-item");
+	li.append('<button type="button" class="btn btn-sm btn-danger pull-right removeDisease" aria-label="Remove"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>');
+	$('#diseaselist').append(li);
+	i++;
+});
