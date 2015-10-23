@@ -149,7 +149,17 @@ $('#button2').on('click',function(e){
 		var format = 'JSON';
 		var reasoning = 'yes';
 
-		$('#drugresults0').append("<h3>" + diseases[0][1] + "</h3>");
+		var panel0 = $("<div></div>");
+		panel0.addClass("panel");
+		panel0.addClass("panel-primary");
+
+		var panelhead0 = $("<div></div>");
+		panelhead0.addClass("panel-heading");
+		panelhead0.append("<h3 class='panel-title'>" + diseases[0][1] + "</h3>");
+		panel0.append(panelhead0);
+
+		var panelbody0 = $("<div></div>");
+		panelbody0.addClass("panel-body");
 
 		$.get('/sparql',data={'endpoint': endpoint, 'query': query, 'format': format, 'reasoning': reasoning}, function(json){
 			console.log(json);
@@ -173,12 +183,15 @@ $('#button2').on('click',function(e){
 					ul.append(li);
 				
 				});
-				$('#drugresults0').append(ul);
+				panelbody0.append(ul);
 
 			} catch(err) {
-				$('#drugresults0').append('Something went wrong!');
+				panelbody0.append('Something went wrong!');
 			}
 		});
+
+		panel0.append(panelbody0);
+		$('#drugresults0').html(panel0);
 
 	}
 	if (indexd > 1) {
@@ -198,7 +211,17 @@ $('#button2').on('click',function(e){
 		var format = 'JSON';
 		var reasoning = 'yes';
 
-		$('#drugresults1').append("<h3>" + diseases[1][1] + "</h3>");
+		var panel1 = $("<div></div>");
+		panel1.addClass("panel");
+		panel1.addClass("panel-primary");
+
+		var panelhead1 = $("<div></div>");
+		panelhead1.addClass("panel-heading");
+		panelhead1.append("<h3 class='panel-title'>" + diseases[1][1] + "</h3>");
+		panel1.append(panelhead1);
+
+		var panelbody1 = $("<div></div>");
+		panelbody1.addClass("panel-body");
 
 		$.get('/sparql',data={'endpoint': endpoint, 'query': query, 'format': format, 'reasoning': reasoning}, function(json){
 			console.log(json);
@@ -222,13 +245,14 @@ $('#button2').on('click',function(e){
 					ul.append(li);
 				
 				});
-				$('#drugresults1').append(ul);
+				panelbody1.append(ul);
 
 			} catch(err) {
-				$('#drugresults1').append('Something went wrong!');
+				panelbody1.append('Something went wrong!');
 			}
 		});
-
+		panel1.append(panelbody1);
+		$('#drugresults1').html(panel1);
 	}	
 	if (indexd > 2) {
 
@@ -247,7 +271,17 @@ $('#button2').on('click',function(e){
 		var format = 'JSON';
 		var reasoning = 'yes';
 
-		$('#drugresults2').append("<h3>" + diseases[2][1] + "</h3>");
+		var panel2 = $("<div></div>");
+		panel2.addClass("panel");
+		panel2.addClass("panel-primary");
+
+		var panelhead2 = $("<div></div>");
+		panelhead2.addClass("panel-heading");
+		panelhead2.append("<h3 class='panel-title'>" + diseases[2][1] + "</h3>");
+		panel2.append(panelhead2);
+
+		var panelbody2 = $("<div></div>");
+		panelbody2.addClass("panel-body");
 
 		$.get('/sparql',data={'endpoint': endpoint, 'query': query, 'format': format, 'reasoning': reasoning}, function(json){
 			console.log(json);
@@ -271,136 +305,95 @@ $('#button2').on('click',function(e){
 					ul.append(li);
 				
 				});
-				$('#drugresults2').append(ul);
+				panelbody2.append(ul);
 
 			} catch(err) {
-				$('#drugresults2').append('Something went wrong!');
+				panelbody2.append('Something went wrong!');
 			}
 		});
-
+		panel2.append(panelbody2);
+		$('#drugresults2').html(panel2);
 	}
 
-
-
-
 /////////////////
-/*
-	if (indexd > 0) {			// Not checking if the first one is deleted!
-		var query = 'PREFIX owl:  <http://www.w3.org/2002/07/owl#>' + 
-					  'PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ' +
-					  'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
-					  'PREFIX : <http://huiqingao.com/ontology/interactingDrugs.ttl#>' +
-					  ' ' +
-					  'SELECT DISTINCT ?label ?drug WHERE {' +
-	    			  '{<' + diseases[0] +'> :possibleDrug ?drug .}';
 
-	    // Get the diseases selected
-	    for(var i = 1; i < indexd; i++){
-	    	if (diseases[i] != "") {
-	    		query += 'UNION' +
-	   	  				'{<' + diseases[i] + '> :possibleDrug ?drug .}';
-	    	}
-		}
-
-	    query += '?drug rdfs:label ?label.' +
-				 '}' +
-				 'ORDER BY ?label';
-		var endpoint = 'http://localhost:5820/interdrugs/query';
-		var format = 'JSON';
-		var reasoning = 'yes';
-
-		$.get('/sparql',data={'endpoint': endpoint, 'query': query, 'format': format, 'reasoning': reasoning}, function(json){
-			console.log(json);
-			
-			try {
-
-				var ul = $('<ul></ul>');
-				ul.addClass('list-group');
-			
-				$.each(json.results.bindings, function(index,result){
-					var li = $('<li></li>');
-					li.addClass('list-group-item');
-				
-					var label = result['label']['value'];			// Retrieve the label
-					var uri = result['drug']['value'];			// Retrieve the URI of the drug resource
-					var a = $('<a></a>');
-					a.attr('href', uri);							// Build a tag with a link to the resource (should work)
-					a.text(label);
-					li.append(a);
-					ul.append(li);
-				
-				});
-				
-				$('#linktarget2').html(ul);
-
-			} catch(err) {
-				$('#linktarget2').html('Something went wrong!');
-			}
-		});
-*/
+});
 		// Interacting drugs
 			
-/*		var query2 = 'PREFIX owl:  <http://www.w3.org/2002/07/owl#>' + 
+$('#button3').on('click',function(e){	
+
+	var endpoint = 'http://localhost:5820/interdrugs/query';
+	var format = 'JSON';
+	var reasoning = 'yes';
+
+	var query3 = 'PREFIX owl:  <http://www.w3.org/2002/07/owl#>' + 
 					  'PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ' +
 					  'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
 					  'PREFIX : <http://huiqingao.com/ontology/interactingDrugs.ttl#>' +
 					  ' ' +
 					  'SELECT DISTINCT ?label1 ?drug1 ?label2 ?drug2 WHERE {' +
-	    			  '{<' + diseases[0] + '> :possibleDrug ?drug1 .}';
+	    			  '{<' + diseases[0][0] + '> :possibleDrug ?drug1 .}';
 
-	    for(var i = 1; i < indexd; i++){
-	    	if (diseases[indexd] != "") {
-	    		query2 += 'UNION' +
-	   	  				'{<' + diseases[i] + '> :possibleDrug ?drug1 .}';
-	    	}
-		}
+    for(var i = 1; i < indexd; i++){
+    		query3 += 'UNION' +
+   	  				'{<' + diseases[i][0] + '> :possibleDrug ?drug1 .}';
+	}
 
-	    query2 += '{<' + diseases[0] +'> :possibleDrug ?drug2 .}';
+    query3 += '{<' + diseases[0][0] +'> :possibleDrug ?drug2 .}';
 
-	    for(var i = 1; i < indexd; i++){
-	    	if (diseases[indexd] != "") {
-	    		query += 'UNION' +
-	   	  				'{<' + diseases[i] + '> :possibleDrug ?drug2 .}';
-	    	}
-		}
+    for(var i = 1; i < indexd; i++){
+    		query3 += 'UNION' +
+   	  				'{<' + diseases[i][0] + '> :possibleDrug ?drug2 .}';
+	}
 
-	    query2 += '?drug1 rdfs:label ?label1;' +
-	    		  '       :interactsWith ?drug2.' +
-	    		  '?drug2 rdfs:label ?label2.' +
-				  '}' +
-				  'ORDER BY ?label1';
+    query3 += '?drug1 rdfs:label ?label1;' +
+    		  '       :interactsWith ?drug2.' +
+    		  '?drug2 rdfs:label ?label2.' +
+			  '}' +
+			  'ORDER BY ?label1';
 
-		$.get('/sparql',data={'endpoint': endpoint, 'query': query2, 'format': format, 'reasoning': reasoning}, function(json){
-			console.log(json);
+	$.get('/sparql',data={'endpoint': endpoint, 'query': query3, 'format': format, 'reasoning': reasoning}, function(json){
+		console.log(json);
+
+		$.each(json.results.bindings, function(index,result){
+			$('[href="' + result['drug1']['value'] + '"]').parent("li").css('background-color', 'khaki');
+			$('[href="' + result['drug2']['value'] + '"]').parent("li").css('background-color', 'khaki');
+		});
+/*		try {
+
+			var ul = $('<ul></ul>');
+			ul.addClass('list-group');
+		
+			$.each(json.results.bindings, function(index,result){
+				var li = $('<li></li>');
+				li.addClass('list-group-item');
 			
-			try {
-
-				var ul = $('<ul></ul>');
-				ul.addClass('list-group');
-			
-				$.each(json.results.bindings, function(index,result){
-					var li = $('<li></li>');
-					li.addClass('list-group-item');
-				
 // ADAPT FOR TWO DRUGS AND TWO LABELS
 
-					var label = result['label']['value'];			// Retrieve the label
-					var uri = result['disease']['value'];			// Retrieve the URI of the drug resource
-					var a = $('<a></a>');
-					a.attr('href', uri);							// Build a tag with a link to the resource (should work)
-					a.text(label);
-					li.append(a);
-					ul.append(li);
-				
-				});
-				
-				$('#linktarget2b').html(ul);
+				var label = result['label']['value'];			// Retrieve the label
+				var uri = result['disease']['value'];			// Retrieve the URI of the drug resource
+				var a = $('<a></a>');
+				a.attr('href', uri);							// Build a tag with a link to the resource (should work)
+				a.text(label);
+				li.append(a);
+				ul.append(li);
+			
+			});
+			
+			$('#linktarget2b').html(ul);
 
-			} catch(err) {
-				$('#linktarget2b').html('Something went wrong!');
-			}
-		
-		});
-	}
-*/	
+		} catch(err) {
+			$('#linktarget2b').html('Something went wrong!');
+		}   
+	*/
+	
+	});
+
+});
+
+// Highlighting interacting drugs on mouseover
+
+$(document).on('mouseenter', '.dosomething', function(){
+    // what you want to happen when mouseover and mouseout 
+    // occurs on elements that match '.dosomething'
 });
