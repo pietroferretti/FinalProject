@@ -29,18 +29,12 @@
 
 				<div class='col-lg-6'>
 					<h3>Selected</h3>
-					<button class="btn btn-warning testButton">Test</button>
-					<div id="testbox"></div>
+					<div id="testbox"></div>	<!-- Debugging -->
 					<ul id='diseaselist' class='list-group'>
 					</ul>
 				</div>
 			</div>
 
-			<div class='row' id='drugresultsrow'>
-				<div class='col-lg-4' id='drugresults0'></div>
-				<div class='col-lg-4' id='drugresults1'></div>
-				<div class='col-lg-4' id='drugresults2'></div>
-			</div>
 
 			<div class='row'>
 				<div class='col-lg-6'>
@@ -49,13 +43,12 @@
 					<p>The application gets the selected diseases and queries the database</p>
 					<div><button id="button2" class='btn btn-primary'>List</button><button id="button3" class='btn btn-primary'>Interactions</button></div>
 				</div>
-				<div class='col-lg-6'>
-					<h3>Drugs</h3>
-					<div id="linktarget2" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
-
-					<h3>Interacting Drugs</h3>
-					<div id="linktarget2b" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
-				</div>
+			</div>
+		</br>
+			<div class='row' id='drugresultsrow'>
+				<div class='col-lg-4' id='drugresults0'></div>
+				<div class='col-lg-4' id='drugresults1'></div>
+				<div class='col-lg-4' id='drugresults2'></div>
 			</div>
 
 		<script src='{{ url_for("static", filename="js/jquery-1.11.0.min.js") }}' type='text/javascript'></script>

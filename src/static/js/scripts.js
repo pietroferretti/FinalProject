@@ -59,14 +59,6 @@ $(document).on("click", "button.removeDisease", function(){
 	$(this).parent("li").remove();
 });
 
-// Test button looking at selected diseases array
-$(document).on("click", "button.testButton", function(){
-	var dump = "";
-	for (var i = 0; i < indexd; i++) {
-        dump = dump + diseases[i][0] + '<br/>'; 
-	}
-	$("#testbox").html(dump);
-});
 
 // QUERYING DISEASES
 
@@ -127,7 +119,6 @@ $('#inputdisease').bind('input', function() {
 // QUERYING POSSIBLE DRUGS AND INTERACTING DRUGS
 
 $('#button2').on('click',function(e){
-/////////////////
 
 	$('#drugresults0').empty();
 	$('#drugresults1').empty();
@@ -314,13 +305,14 @@ $('#button2').on('click',function(e){
 		panel2.append(panelbody2);
 		$('#drugresults2').html(panel2);
 	}
-
-/////////////////
-
 });
-		// Interacting drugs
+
+// Interacting drugs
+
+var interactions = new Map();
 			
 $('#button3').on('click',function(e){	
+	interactions = new Map();
 
 	var endpoint = 'http://localhost:5820/interdrugs/query';
 	var format = 'JSON';
@@ -357,35 +349,15 @@ $('#button3').on('click',function(e){
 
 		$.each(json.results.bindings, function(index,result){
 			$('[href="' + result['drug1']['value'] + '"]').parent("li").css('background-color', 'khaki');
+			$('[href="' + result['drug1']['value'] + '"]').parent("li").addClass("interacting");
 			$('[href="' + result['drug2']['value'] + '"]').parent("li").css('background-color', 'khaki');
+			$('[href="' + result['drug2']['value'] + '"]').parent("li").addClass("interacting");
+			if ((interactions).get(result['drug1']['value']) == undefined) {
+				interactions.set(result['drug1']['value'], [result['drug2']['value']]);
+			} else {
+				interactions.get(result['drug1']['value']).push(result['drug2']['value']);
+			}
 		});
-/*		try {
-
-			var ul = $('<ul></ul>');
-			ul.addClass('list-group');
-		
-			$.each(json.results.bindings, function(index,result){
-				var li = $('<li></li>');
-				li.addClass('list-group-item');
-			
-// ADAPT FOR TWO DRUGS AND TWO LABELS
-
-				var label = result['label']['value'];			// Retrieve the label
-				var uri = result['disease']['value'];			// Retrieve the URI of the drug resource
-				var a = $('<a></a>');
-				a.attr('href', uri);							// Build a tag with a link to the resource (should work)
-				a.text(label);
-				li.append(a);
-				ul.append(li);
-			
-			});
-			
-			$('#linktarget2b').html(ul);
-
-		} catch(err) {
-			$('#linktarget2b').html('Something went wrong!');
-		}   
-	*/
 	
 	});
 
@@ -393,7 +365,22 @@ $('#button3').on('click',function(e){
 
 // Highlighting interacting drugs on mouseover
 
-$(document).on('mouseenter', '.dosomething', function(){
-    // what you want to happen when mouseover and mouseout 
-    // occurs on elements that match '.dosomething'
+$(document).on('mouseenter', '.interacting', function(){
+    $(this).css('background-color', 'tomato');
+    var uri = $(this).children("a").attr("href");
+    n = interactions.get(uri).length;
+    for (var i = 0; i < n; i++) {
+    	$('[href="' + interactions.get(uri)[i] + '"]').parent("li").css('background-color', 'tomato');
+    }
 });
+
+$(document).on('mouseleave', '.interacting', function(){
+    $(this).css('background-color', 'khaki');
+    var uri = $(this).children("a").attr("href");
+    n = interactions.get(uri).length;
+    for (var i = 0; i < n; i++) {
+    	$('[href="' + interactions.get(uri)[i] + '"]').parent("li").css('background-color', 'khaki');
+    }
+});
+
+
