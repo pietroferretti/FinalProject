@@ -34,7 +34,7 @@ def sparql():
     query = request.args.get('query', None)
 
     return_format = request.args.get('format','JSON')
-    reasoning = request.args.get('reasoning')      #Change one
+    reasoning = request.args.get('reasoning')     
 
 
     if endpoint and query :
@@ -48,7 +48,7 @@ def sparql():
             sparql.setReturnFormat(JSON)
             sparql.addParameter('Accept','application/sparql-results+json')
 
-        if reasoning == 'yes':      #Change two
+        if reasoning == 'yes':   
             sparql.addParameter('reasoning','true')
 
         app.logger.debug('Query:\n{}'.format(query))
