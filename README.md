@@ -1,6 +1,6 @@
 #README
 
-Thank you for reviewing our project.
+Thank you very much for reviewing our project.
 
 The screencast of the application is on: https://vimeo.com/143414010
 
