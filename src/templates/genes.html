@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Final project prototype: Drugs</title>
+		<title>Final project prototype: Genes</title>
 	</head>
 
 	<body>
 		<div class="container">
 			<div class='row'>
 				<div class='col-lg-12'>
-					<h1>Drugs and Interactions</h1>
+					<h1>Genes and Diseases</h1>
 				</div>
 			</div>
 
@@ -28,7 +28,7 @@
 
 				<div class='col-lg-6'>
 					<h3>Selected diseases</h3>
-					<div id="testbox"></div>	<!-- Debugging -->
+					<div id="testbox"></div>	<!-- Debugging again-->
 					<ul id='selectedlist' class='list-group'>
 					</ul>
 				</div>
@@ -38,21 +38,19 @@
 			<div class='row'>
 				<div class='col-lg-6'>
 
-					<h3>Find drugs</h3>
+					<h3>Find genes</h3>
 					<p>The application gets the selected diseases and queries the database</p>
-					<div><button id="drugsbutton" class='btn btn-primary'>Get drugs</button></div>
+					<div><button id="genesbutton" class='btn btn-primary'>Get genes</button></div>
 				</div>
 			</div>
 		</br>
-			<div class='row' id='drugresultsrow'>
-				<div class='col-lg-4' id='drugresults0'></div>
-				<div class='col-lg-4' id='drugresults1'></div>
-				<div class='col-lg-4' id='drugresults2'></div>
+			<div class='row' id='generesultsrow'>
+				<div class='col-lg-4' id='generesults0'></div>
+				<div class='col-lg-4' id='generesults1'></div>
+				<div class='col-lg-4' id='generesults2'></div>
 			</div>
 
 		<script src='{{ url_for("static", filename="js/jquery-1.11.0.min.js") }}' type='text/javascript'></script>
 		<script src='{{ url_for("static", filename="js/scripts.js") }}' type='text/javascript'></script>
-
-
 	</body>
 </html>

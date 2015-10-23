@@ -15,6 +15,16 @@ def first_page():
     app.logger.debug('You arrived at ' + url_for('first_page'))
     return render_template('index.html')
 
+@app.route('/genes')
+def genes_page():
+    app.logger.debug('You arrived at ' + url_for('genes_page'))
+    return render_template('genes.html')
+
+@app.route('/drugs')
+def drugs_page():
+    app.logger.debug('You arrived at ' + url_for('drugs_page'))
+    return render_template('drugs.html')
+
 @app.route('/show',methods=['GET'])
 def show_message():
     app.logger.debug('You arrived at ' + url_for('show_message'))
