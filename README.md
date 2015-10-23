@@ -1,5 +1,9 @@
 #README
 
+Thank you for reviewing our project.
+
+The screencast of the application is on: https://vimeo.com/143414010
+
 PLEASE READ.
 We had great projects for our application, but due to time constraints and more importantly because of our lack of skill and experience in web programming (neither of us ever actually learnt javascript or html), the application is far from completed.
 This is what is missing and we would have implemented if we had more time:
