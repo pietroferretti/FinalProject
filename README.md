@@ -2,6 +2,8 @@
 
 Thank you very much for reviewing our project.
 
+The final report is directly under folder "FinalProject", named "final_report.pdf". It can also be reached from link: https://github.com/PietroFerretti/FinalProject/blob/master/final_report.pdf 
+
 A screencast of the application is on: https://vimeo.com/143414010
 
 OUR CONFESS:
